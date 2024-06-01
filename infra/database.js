@@ -22,7 +22,6 @@ async function getNewClient() {
     database: process.env.POSTGRES_DB,
     password: process.env.POSTGRES_PASSWORD,
     ssl: getSSLValues(),
-    connectionTimeoutMillis: 120000,
   });
 
   await client.connect();

@@ -3,16 +3,11 @@ import { join } from "node:path";
 import database from "infra/database.js";
 
 export default async function migrations(request, response) {
+  if (request.method !== "GET" && request.method !== "POST") {
+    return response.status(405).end();
+  }
+
   const dbClient = await database.getNewClient();
-  const dbClient1 = await database.getNewClient();
-  const dbClient2 = await database.getNewClient();
-  const dbClient3 = await database.getNewClient();
-  const dbClient4 = await database.getNewClient();
-  const dbClient5 = await database.getNewClient();
-  const dbClient6 = await database.getNewClient();
-  const dbClient7 = await database.getNewClient();
-  const dbClient8 = await database.getNewClient();
-  const dbClient9 = await database.getNewClient();
 
   const defaultMigrationOptions = {
     dbClient: dbClient,
@@ -45,6 +40,4 @@ export default async function migrations(request, response) {
 
     return response.status(200).json(migratedMigrations);
   }
-
-  return response.status(405).end();
 }
